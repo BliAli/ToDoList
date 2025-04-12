@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todolist/utils/todo_list.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -39,6 +39,30 @@ class _HomePageState extends State<HomePage> {
             onChanged: (value) => checkBoxChanged(index),
           );
         },
+      ),
+      floatingActionButton: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Add your new task',
+                  fillColor: Colors.deepPurple.shade200,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
+        ],
       ),
     );
   }
