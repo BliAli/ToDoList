@@ -15,9 +15,18 @@ class _HomePageState extends State<HomePage> {
     ['Watching Windah Basudara', false],
   ];
 
+  final _controller = TextEditingController();
+
   void checkBoxChanged(int index) {
     setState(() {
       toDoList[index][1] = !toDoList[index][1];
+    });
+  }
+
+  void saveNewTask() {
+    setState(() {
+      toDoList.add([_controller.text, false]);
+      _controller.clear();
     });
   }
 
@@ -46,6 +55,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
+                controller: _controller,
                 decoration: InputDecoration(
                   hintText: 'Add your new task',
                   fillColor: Colors.deepPurple.shade200,
@@ -61,7 +71,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
+          FloatingActionButton(onPressed: saveNewTask, child: Icon(Icons.add)),
         ],
       ),
     );
