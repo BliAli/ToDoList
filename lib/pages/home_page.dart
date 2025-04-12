@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/utils/todo_list.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -6,6 +7,7 @@ class HomePage extends StatelessWidget {
   List toDoList = [
     ['Learn Flutter', false],
     ['Create Project', false],
+    ['Watching Windah Basudara', false],
   ];
 
   @override
@@ -20,25 +22,7 @@ class HomePage extends StatelessWidget {
       body: ListView.builder(
         itemCount: toDoList.length,
         itemBuilder: (BuildContext context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(
-              top: 20,
-              left: 20,
-              right: 20,
-              bottom: 0,
-            ),
-            child: Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.deepPurple,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Text(
-                toDoList[index][0],
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-            ),
-          );
+          return TodoList(taskName: toDoList[index][0]);
         },
       ),
     );
