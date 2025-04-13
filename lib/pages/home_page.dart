@@ -9,11 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List toDoList = [
-    ['Learn Flutter', false],
-    ['Create Project', false],
-    ['Watching Windah Basudara', false],
-  ];
+  List toDoList = [];
 
   final _controller = TextEditingController();
 
@@ -27,6 +23,12 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       toDoList.add([_controller.text, false]);
       _controller.clear();
+    });
+  }
+
+  void deleteTask(int index) {
+    setState(() {
+      toDoList.removeAt(index);
     });
   }
 
@@ -46,33 +48,40 @@ class _HomePageState extends State<HomePage> {
             taskName: toDoList[index][0],
             taskCompleted: toDoList[index][1],
             onChanged: (value) => checkBoxChanged(index),
+            deleteFunction: (context) => deleteTask(index),
           );
         },
       ),
-      floatingActionButton: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  hintText: 'Add your new task',
-                  fillColor: Colors.deepPurple.shade200,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.deepPurple),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.deepPurple),
-                    borderRadius: BorderRadius.circular(15),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    hintText: 'Add your new task',
+                    fillColor: Colors.deepPurple.shade200,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.deepPurple),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.deepPurple),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          FloatingActionButton(onPressed: saveNewTask, child: Icon(Icons.add)),
-        ],
+            FloatingActionButton(
+              onPressed: saveNewTask,
+              child: Icon(Icons.add),
+            ),
+          ],
+        ),
       ),
     );
   }
